@@ -4,8 +4,7 @@
   <link rel="shortcut icon" href="./myicon.png" />
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.material-design/0.3.0/css/roboto.min.css">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">
-  -->
+   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">-->
   <link rel="stylesheet" href="material-fullpalette-custom.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
   <link rel="stylesheet" href="styles.css">
@@ -31,14 +30,14 @@
             <a repeat.for="action of searchActions" click.trigger='$parent.sendInitialQuery(action)' class="btn  btn-info btn-sm">${action}</a>
           </div>
         </div>
+        <div show.bind="isProcessing" class="spinner">
+          <i class="fa fa-spinner fa-spin fa-5x"></i>
+        </div>
         <div show.bind="!isProcessing" class="row">
           <h3 if.bind="data.length" class="pull-left">${resolvedSearchTerm} - ${currentAction}</h3>
           <button if.bind="history.length" click.trigger="back()" class="btn btn-primary btn-flat pull-right">
-            <i class="mdi-navigation-arrow-back"></i>
+            <i class="fa fa-arrow-back"></i>
           </button>
-        </div>
-        <div show.bind="isProcessing" class="spinner">
-          <i class="fa fa-spinner fa-spin fa-5x"></i>
         </div>
         <div show.bind="!isProcessing" if.bind="data.length" class="table-responsive">
           <table class="table table-condensed table-hover">
@@ -68,5 +67,5 @@
 </template>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
