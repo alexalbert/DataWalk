@@ -1,20 +1,4 @@
-/**
- * Created by Alex on 6/9/2015.
- */
-
 export class SparqlMovies {
-
-  constructor(){
-  }
-
-  //splitName(name) {
-  //  var tokens = name.split(',');
-  //  if (tokens.length === 1) {
-  //    tokens.unshift('');
-  //  }
-  //  return tokens;
-  //}
-
   filmsOfDirector(name) {
     let names = name.split(',');
     if (names.length === 1) {
@@ -100,22 +84,21 @@ export class SparqlMovies {
   editResponse(response) {
     return response;
   }
-  
 
   META = {
-    'Director' : {
-        'Films': 
-          {target: 'Film', title: 'Films of ${key}', query: this.filmsOfDirector}
+    'Director': {
+            'Films':
+            { target: 'Film', title: 'Films of ${key}', query: this.filmsOfDirector }
         },
-    'Actor' : {
-        'Films': 
-          {target: 'Film', title: 'Films of ${key}', query: this.filmsOfActor},
+    'Actor': {
+            'Films':
+            { target: 'Film', title: 'Films of ${key}', query: this.filmsOfActor },
         },
-    'Film' : {
-        'Actors': 
-          {target: 'Actor', title: 'Actors in ${key}', query: this.actorsOfFilm},
-        'Director':
-          {target: 'Director', title: 'Director of ${key}', query: this.directorsOfFilm}
-      }
+    'Film': {
+            'Actors':
+            { target: 'Actor', title: 'Actors in ${key}', query: this.actorsOfFilm },
+            'Director':
+            { target: 'Director', title: 'Director of ${key}', query: this.directorsOfFilm }
+        }
   };
 }

@@ -1,20 +1,20 @@
-import {transient, inject} from 'aurelia-framework';
+import { transient, inject } from 'aurelia-framework';
 
 @transient()
 export class SparqlNobels {
-  
+
   withWiki = false;
 
- set showWiki(showWiki) {
-   this.withWiki = showWiki;
- }
-  
- query(filter, withWiki) {
-   let WIKI_CLAUSE = this.withWiki ? ` SERVICE <http://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org> 
-      { 
+    set showWiki(showWiki) {
+        this.withWiki = showWiki;
+    }
+
+    query(filter, withWiki) {
+        let WIKI_CLAUSE = this.withWiki ? ` SERVICE <http://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org>
+      {
         ?wklink foaf:isPrimaryTopicOf ?Wiki .
       }` : "";
-      
+
     return `SELECT DISTINCT ?Name ?Category ?Year ?Country ?Wiki WHERE {
       ?p rdfs:label ?Name .
       ?p rdf:type nobel:Laureate .
@@ -29,9 +29,9 @@ export class SparqlNobels {
       FILTER(${filter})
       ${WIKI_CLAUSE}
     }
-    ORDER BY ?Year`;
-  } 
-  
+            ;
+  }
+
   byYear(year, that) {
     return that.query(`?Year = ${year}`);
   }
@@ -63,24 +63,24 @@ export class SparqlNobels {
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
   PREFIX freebase: <http://rdf.freebase.com/ns/>
   PREFIX dbpprop: <http://dbpedia.org/property/>
-  PREFIX skos: <http://www.w3.org/2004/02/skos/core#>     
+  PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
   `;
 
   editResponse(response) {
     return response;
   }
-  
+
   META = {
-    'Search by =>' : {
-        'Category': 
-          {target: 'Search by =>', title: '${key}', key: 'Category', query: this.byCategory},
-          
-        'Year': 
-          {target: 'Search by =>', title: '${key}', key: 'Year', query: this.byYear},
-          
-        'Country': 
-          {target: 'Search by =>', title: '${key}', key: 'Country', query: this.byCountry}
-          
+    'Search by =>': {
+            'Category':
+            { target: 'Search by =>', title: '${key}', key: 'Category', query: this.byCategory },
+
+            'Year':
+            { target: 'Search by =>', title: '${key}', key: 'Year', query: this.byYear },
+
+            'Country':
+            { target: 'Search by =>', title: '${key}', key: 'Country', query: this.byCountry }
+
         },
   };
 }

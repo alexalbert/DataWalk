@@ -1,10 +1,6 @@
- /**
- * Created by Alex on 6/9/2015.
- */
-
 export class SparqlProgramingLanguages {
 
-  constructor(){
+  constructor() {
   }
 
   influencedBy(language) {
@@ -33,27 +29,18 @@ export class SparqlProgramingLanguages {
 
   editResponse(json) {
     var str = JSON.stringify(json);
-    var edited =  str.replace(/\(programming language\)/g, "");
+    var edited = str.replace(/\(programming language\)/g, "");
     return JSON.parse(edited);
   }
 
   ENDPOINT = "http://dbpedia.org/sparql";
 
   PREFIXES =
-   `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    `PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
     PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
     PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
     PREFIX foaf:  <http://xmlns.com/foaf/0.1/>`;
 
-  /**
-   *  Map describing entitites and their relationship. One element is
-   *  Entity : [array of related entities and functions to retrieve them given current entity]
-   */
-  // META = {
-  //   'Language' : {'Influenced by': this.influencedBy, 'Influenced': this.influenced},
-  //   'Influenced by' : {'Influenced by': this.influencedBy, 'Influenced': this.influenced},
-  //   'Influenced' : {'Influenced by': this.influencedBy, 'Influenced': this.influenced}
-  // };
 
   /**
    The model is :
@@ -65,7 +52,7 @@ export class SparqlProgramingLanguages {
   **/
 
   META = {
-    'Language' : { 
+    'Language': {
       'Influenced by': { target: 'Language', title: 'Languages influenced by ${key}', query: this.influencedBy },
       'Influenced': { target: 'Language', title: '${key} is influenced by', query: this.influencedBy }
     }
