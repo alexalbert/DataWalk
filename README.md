@@ -2,6 +2,8 @@
 
 Proof of concept application using Aurelia http://aurelia.io, material design theme for Boostrap https://fezvrasta.github.io/bootstrap-material-design, and SPARQL http://www.w3.org/TR/rdf-sparql-query/ to retrieve data from RDF databases. Pluggable modules describe interfaces to subsets of RDF data, generic view provides user interface. 
 
+Demo at http://alexalbert.github.io/DataWalk. 
+
 # Aurelia 
 
 [![ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.io)
