@@ -5,12 +5,12 @@ export class SparqlNobels {
 
   withWiki = false;
 
-    set showWiki(showWiki) {
-        this.withWiki = showWiki;
-    }
+  set showWiki(showWiki) {
+    this.withWiki = showWiki;
+  }
 
-    query(filter, withWiki) {
-        let WIKI_CLAUSE = this.withWiki ? ` SERVICE <http://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org>
+  query(filter, withWiki) {
+    let WIKI_CLAUSE = this.withWiki ? ` SERVICE <http://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org>
       {
         ?wklink foaf:isPrimaryTopicOf ?Wiki .
       }` : "";
@@ -27,9 +27,7 @@ export class SparqlNobels {
       ?npcategory rdfs:label ?Category .
       ?p owl:sameAs ?wklink
       FILTER(${filter})
-      ${WIKI_CLAUSE}
-    }
-            ;
+      ${WIKI_CLAUSE}`;
   }
 
   byYear(year, that) {
@@ -72,16 +70,16 @@ export class SparqlNobels {
 
   META = {
     'Search by =>': {
-            'Category':
-            { target: 'Search by =>', title: '${key}', key: 'Category', query: this.byCategory },
+      'Category':
+      { target: 'Search by =>', title: '${key}', key: 'Category', query: this.byCategory },
 
-            'Year':
-            { target: 'Search by =>', title: '${key}', key: 'Year', query: this.byYear },
+      'Year':
+      { target: 'Search by =>', title: '${key}', key: 'Year', query: this.byYear },
 
-            'Country':
-            { target: 'Search by =>', title: '${key}', key: 'Country', query: this.byCountry }
+      'Country':
+      { target: 'Search by =>', title: '${key}', key: 'Country', query: this.byCountry }
 
-        },
+    },
   };
 }
 
