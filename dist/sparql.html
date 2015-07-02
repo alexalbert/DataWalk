@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="./myicon.png" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.material-design/0.3.0/css/roboto.min.css">
+   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css">-->
+  <link rel="stylesheet" href="material-fullpalette-custom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<template>
+  <section class="au-animate">
+    <div class='container'>
+      <div class='span12'>
+        <h2>${heading}</h2>
+        <div class="row">
+          <div if.bind="entities.length > 1" repeat.for="en of entities" class="radio radio-info pull-left" style="margin-top: 10px">
+            <label>
+              <input type="radio" name="en" value.bind="en" checked.bind="$parent.currentRadio" />${en}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <form class="navbar-form navbar-left form-control">
+              <input type="text" value.bind="searchTerm" class="form-control  col-xs-2" placeholder="${currentRadio}" id="search">
+            </form>
+          </div>
+          <div class="btn-toolbar">
+            <a repeat.for="action of searchActions" click.trigger='$parent.sendInitialQuery(action)' class="btn  btn-info btn-sm">${action}</a>
+          </div>
+        </div>
+        <div show.bind="isProcessing" class="spinner">
+          <i class="fa fa-spinner fa-spin fa-5x"></i>
+        </div>
+        <div show.bind="!isProcessing" class="row">
+          <h3 if.bind="data.length" class="pull-left">${resolvedSearchTerm} - ${currentAction}</h3>
+          <button if.bind="history.length" click.trigger="back()" class="btn btn-primary btn-flat pull-right">
+            <i class="fa fa-arrow-back"></i>
+          </button>
+        </div>
+        <div show.bind="!isProcessing && data.length" class="table-responsive">
+          <table class="table table-condensed table-hover">
+            <tr class="info">
+              <th  repeat.for="cell of firstRow">
+                <h4 if.bind="cell.type !== 'uri'">${cell.name}</h4>
+              </th>
+              <th repeat.for="a of tableActions"></th>
+            </tr>
+            <tbody>
+              <tr class='info' repeat.for="row of data">
+                <td repeat.for="cell of row">
+                  <label if.bind="cell.type !== 'uri'" style="padding-top: 20px; color: @purple">${cell.value}</label>
+                  <a if.bind="cell.type === 'uri'" href="${cell.value}" target="_blank" class="btn btn-flat  btn-info">${cell.name}</a>
+                </td>
+                <td repeat.for="action of $parent.tableActions">
+                  <a click.trigger='$parent.$parent.sendTableQuery(action, $parent.row)' class="btn btn-flat  btn-primary">${action}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <br/>
+      </div>
+    </div>
+  </section>
+</template>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/ripples.min.js"></script>
