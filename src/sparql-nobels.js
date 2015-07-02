@@ -25,9 +25,10 @@ export class SparqlNobels {
       ?placeOfBirth rdfs:label ?Country .
       ?np nobel:category ?npcategory .
       ?npcategory rdfs:label ?Category .
-      ?p owl:sameAs ?wklink
-      FILTER(${filter})
-      ${WIKI_CLAUSE}`;
+      ?p owl:sameAs ?wklink .
+      FILTER(${filter}) .
+      ${WIKI_CLAUSE} 
+      }`;
   }
 
   byYear(year, that) {

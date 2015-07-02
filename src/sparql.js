@@ -17,6 +17,8 @@ export class Sparql {
   title;
   sparqlAdapter;
   isProcessing = false;
+  data;
+  firstRow;
 
   history = [];
   lastMoveForward = false;
@@ -27,7 +29,7 @@ export class Sparql {
   }
 
  activate(params, routeConfig) {
-    this.topic = this.topicProvider.topics()[routeConfig.name];
+    this.topic = this.topicProvider.topics()[routeConfig.title];
     this.sparqlAdapter.setTopic(this.topic);
     this.entities = this.getEntities();
     this.currentRadio = this.entities[0];
@@ -79,30 +81,30 @@ export class Sparql {
   }
 
   sendQuery(entity, action, searchTerm) {
-    // searchTerm = searchTerm || this.searchTerm;
     if (!searchTerm) return;
     
     this.isProcessing = true;
 
     this.currentAction = action;
     
-    // const entity = fromSearch ? this.currentRadio : this.currentEntity; 
-
-    this.sparqlAdapter.querySparql(searchTerm, entity, this.currentAction).
+    let that = this;
+    return this.sparqlAdapter.querySparql(searchTerm, entity, this.currentAction).
       then(resp => {
             if (resp) {
-                this.data = resp;
-                this.resolvedSearchTerm = searchTerm;
-                this.searchTerm = null;
-                this.isProcessing = false
+                that.data = resp;
+                that.firstRow = that.data[0];
+                that.resolvedSearchTerm = searchTerm;
+                that.searchTerm = null;
+                that.isProcessing = false;
+                
+                that.setContext(that.currentAction);
+          
+                that.lastMoveForward = true;
+                that.history.push({ 'data': that.data, 
+                    'actions': that.actions })
+
             }
         });
-
-     this.setContext(this.currentAction);
-
-     this.lastMoveForward = true;
-     this.history.push({ 'data': this.data, 
-          'actions': this.actions })
   }
 
   back() {

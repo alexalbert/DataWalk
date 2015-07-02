@@ -39,10 +39,10 @@
             <i class="fa fa-arrow-back"></i>
           </button>
         </div>
-        <div show.bind="!isProcessing" if.bind="data.length" class="table-responsive">
+        <div show.bind="!isProcessing && data.length" class="table-responsive">
           <table class="table table-condensed table-hover">
             <tr class="info">
-              <th repeat.for="cell of data[0]">
+              <th  repeat.for="cell of firstRow">
                 <h4 if.bind="cell.type !== 'uri'">${cell.name}</h4>
               </th>
               <th repeat.for="a of tableActions"></th>
