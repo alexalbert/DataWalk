@@ -7,6 +7,7 @@ bower_components
 jspm_packages/github/
 jspm-packages/*
 !jspm_packages/system.js
+!jspm_packages/es6-module-loader.js
 !jspm_packages/npm
 jspm_packages/npm/*
 !jspm_packages/npm/font-awesome@4.3.0/
