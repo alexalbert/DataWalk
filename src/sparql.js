@@ -16,9 +16,11 @@ export class Sparql {
   action;
   title;
   sparqlAdapter;
-  isProcessing = false;
+  wasProcessing;
+  isProcessing;
   data;
   firstRow;
+  title;
 
   history = [];
   lastMoveForward = false;
@@ -34,6 +36,8 @@ export class Sparql {
     this.entities = this.getEntities();
     this.currentRadio = this.entities[0];
     this.currentEntity = this.entities[0];
+    this.wasProcessing = false;
+    this.isProcessing = false;
   }
 
   attached() {
@@ -42,11 +46,6 @@ export class Sparql {
 
   getEntities() {
     return Object.keys(this.topic.META);
-  }
-
-  setContext(action) {
-    this.title = this.topic.META[this.currentEntity][action].title;
-    this.currentEntity = this.topic.META[this.currentEntity][action].target;
   }
 
   determineActivationStrategy() {
@@ -83,6 +82,7 @@ export class Sparql {
   sendQuery(entity, action, searchTerm) {
     if (!searchTerm) return;
     
+    this.wasProcessing = true;
     this.isProcessing = true;
 
     this.currentAction = action;
@@ -94,11 +94,14 @@ export class Sparql {
                 that.data = resp;
                 that.firstRow = that.data[0];
                 that.resolvedSearchTerm = searchTerm;
+                
+                let context = this.topic.META[this.currentEntity][this.currentAction];
+                that.title = context.title.replace(/REPLACE_ME/, searchTerm);
+                this.currentEntity = context.target;
+
                 that.searchTerm = null;
                 that.isProcessing = false;
-                
-                that.setContext(that.currentAction);
-          
+                                         
                 that.lastMoveForward = true;
                 that.history.push({ 'data': that.data, 
                     'actions': that.actions })

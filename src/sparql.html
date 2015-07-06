@@ -34,11 +34,13 @@
           <i class="fa fa-spinner fa-spin fa-5x"></i>
         </div>
         <div show.bind="!isProcessing" class="row">
-          <h3 if.bind="data.length" class="pull-left">${resolvedSearchTerm} - ${currentAction}</h3>
+          <h3 if.bind="data.length" class="pull-left">${title}</h3>
+          <br/>
           <button if.bind="history.length" click.trigger="back()" class="btn btn-primary btn-flat pull-right">
             <i class="fa fa-arrow-back"></i>
           </button>
         </div>
+        <h4 show.bind="wasProcessing && !isProcessing && !data.length">No results found</h4>
         <div show.bind="!isProcessing && data.length" class="table-responsive">
           <table class="table table-condensed table-hover">
             <tr class="info">
