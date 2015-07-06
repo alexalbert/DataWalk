@@ -72,13 +72,13 @@ export class SparqlNobels {
   META = {
     'Search by =>': {
       'Category':
-      { target: 'Search by =>', title: '${key}', key: 'Category', query: this.byCategory },
+      { target: 'Search by =>', title: 'Nobel laureates in REPLACE_ME', key: 'Category', query: this.byCategory },
 
       'Year':
-      { target: 'Search by =>', title: '${key}', key: 'Year', query: this.byYear },
+      { target: 'Search by =>', title: 'REPLACE_ME Nobel laureates', key: 'Year', query: this.byYear },
 
       'Country':
-      { target: 'Search by =>', title: '${key}', key: 'Country', query: this.byCountry }
+      { target: 'Search by =>', title: 'Nobel laureates born in REPLACE_ME', key: 'Country', query: this.byCountry }
 
     },
   };

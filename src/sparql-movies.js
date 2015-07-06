@@ -88,17 +88,17 @@ export class SparqlMovies {
   META = {
     'Director': {
             'Films':
-            { target: 'Film', title: 'Films of ${key}', query: this.filmsOfDirector }
+            { target: 'Film', title: 'Films of REPLACE_ME', query: this.filmsOfDirector }
         },
     'Actor': {
             'Films':
-            { target: 'Film', title: 'Films of ${key}', query: this.filmsOfActor },
+            { target: 'Film', title: 'Films of REPLACE_ME', query: this.filmsOfActor },
         },
     'Film': {
             'Actors':
-            { target: 'Actor', title: 'Actors in ${key}', query: this.actorsOfFilm },
+            { target: 'Actor', title: 'Actors in REPLACE_ME', query: this.actorsOfFilm },
             'Director':
-            { target: 'Director', title: 'Director of ${key}', query: this.directorsOfFilm }
+            { target: 'Director', title: 'Director of REPLACE_ME', query: this.directorsOfFilm }
         }
   };
 }
