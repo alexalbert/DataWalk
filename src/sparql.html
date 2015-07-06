@@ -14,8 +14,8 @@
     <div class='container'>
       <div class='span12'>
         <h2>${heading}</h2>
-        <div class="row">
-          <div if.bind="entities.length > 1" repeat.for="en of entities" class="radio radio-info pull-left" style="margin-top: 10px">
+        <div class="row" show.bind="entities.length > 1"> 
+          <div repeat.for="en of entities" class="radio radio-info pull-left" style="margin-top: 10px">
             <label>
               <input type="radio" name="en" value.bind="en" checked.bind="$parent.currentRadio" />${en}</label>
           </div>
