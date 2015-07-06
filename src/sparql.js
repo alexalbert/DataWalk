@@ -97,7 +97,7 @@ export class Sparql {
                 that.isMovingBack = false;
                 // Push previous frame to history
                 if (that.data) {
-                  that.history.push({ data: that.data, actions: that.actions,
+                  that.history.push({ data: that.data, entity: that.currentEntity,
                                     title: that.title, firstRow: that.firstRow });
                 }
                 
@@ -125,7 +125,7 @@ export class Sparql {
    
     const snapshot = this.history.slice(-1)[0];
     if (snapshot !== undefined) {
-      this.actions = snapshot.actions;
+      this.currentEntity = snapshot.entity;
       this.data = snapshot.data;
       this.title = snapshot.title;
       this.firstRow = snapshot.firstRow;
