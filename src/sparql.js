@@ -21,9 +21,8 @@ export class Sparql {
   data;
   firstRow;
   title;
-
-  history = [];
-  lastMoveForward = false;
+  isMovingBack;
+  history;
 
   constructor(topicProvider, sparqlAdapter) {
     this.topicProvider = topicProvider;
@@ -38,6 +37,8 @@ export class Sparql {
     this.currentEntity = this.entities[0];
     this.wasProcessing = false;
     this.isProcessing = false;
+    this.isMovingBack = false;
+    this.history = [];
   }
 
   attached() {
@@ -72,7 +73,6 @@ export class Sparql {
     if (key) {
       searchTerm = 
       currentRow.filter(f => {return (f.name === key)} )[0].value;
-      // searchTerm = currentRow[key].value;
     } else {
       searchTerm = currentRow[0].value;
     }
@@ -91,6 +91,16 @@ export class Sparql {
     return this.sparqlAdapter.querySparql(searchTerm, entity, this.currentAction).
       then(resp => {
             if (resp) {
+                if (that.isMovingBack) {
+                  that.history.pop();
+                }
+                that.isMovingBack = false;
+                // Push previous frame to history
+                if (that.data) {
+                  that.history.push({ data: that.data, actions: that.actions,
+                                    title: that.title, firstRow: that.firstRow });
+                }
+                
                 that.data = resp;
                 that.firstRow = that.data[0];
                 that.resolvedSearchTerm = searchTerm;
@@ -101,26 +111,24 @@ export class Sparql {
 
                 that.searchTerm = null;
                 that.isProcessing = false;
-                                         
-                that.lastMoveForward = true;
-                that.history.push({ 'data': that.data, 
-                    'actions': that.actions })
-
             }
         });
   }
 
   back() {
-    if (this.lastMoveForward) {
+    if (this.isMovingBack) {
       // Drop last frame
       this.history.pop();
-      this.lastMoveForward = false;
     }
 
+    this.isMovingBack = true;
+   
     const snapshot = this.history.slice(-1)[0];
     if (snapshot !== undefined) {
       this.actions = snapshot.actions;
       this.data = snapshot.data;
+      this.title = snapshot.title;
+      this.firstRow = snapshot.firstRow;
     }
   }
 }
