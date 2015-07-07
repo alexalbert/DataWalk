@@ -1,6 +1,7 @@
 export class SparqlProgramingLanguages {
 
-  constructor() {
+  get description() {
+    return 'Source: wiki.dbpedia.org.';
   }
 
   influencedBy(language) {

@@ -1,4 +1,9 @@
 export class SparqlMovies {
+  
+  get description() {
+    return 'Source: wiki.dbpedia.org.';
+  }
+
   filmsOfDirector(name) {
     let names = name.split(',');
     if (names.length === 1) {

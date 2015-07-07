@@ -8,6 +8,11 @@ export class SparqlNobels {
   set showWiki(showWiki) {
     this.withWiki = showWiki;
   }
+  
+  get description() {
+    return this.withWiki ? 'Source: data.nobelprize.org and wiki.dbpedia.org.' : 
+                           'Source: data.nobelprize.org.';
+  }
 
   query(filter, withWiki) {
     let WIKI_CLAUSE = this.withWiki ? ` SERVICE <http://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org>
