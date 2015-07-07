@@ -17,7 +17,6 @@ export class Sparql {
   isProcessing;
   data;
   firstRow;
-  title;
   isMovingBack;
   history;
 
@@ -75,7 +74,7 @@ export class Sparql {
     }
     return this.sendQuery(this.currentEntity, action, searchTerm);
   }
-
+  
   sendQuery(entity, action, searchTerm) {
     if (!searchTerm) return;
     
@@ -109,6 +108,24 @@ export class Sparql {
                 that.isProcessing = false;
             }
         });
+  }
+  
+ sort(name) {
+    let index = undefined;
+    this.firstRow.some((el, ind) => {
+      index = ind;
+      return el.name === name; 
+    });
+    
+    if (index == undefined) return;
+    
+    this.data.sort((a, b) => {
+      if (a[index].value < b[index].value)
+        return -1;
+      if (a[index].value > b[index].value)
+        return 1;
+      return 0
+    });
   }
 
   back() {
