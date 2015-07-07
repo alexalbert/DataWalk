@@ -8,12 +8,9 @@ import { SparqlAdapter } from './sparql-adapter' ;
 @inject(TopicProvider, SparqlAdapter)
 export class Sparql {
 
-  searchTerm;
-  resolvedSearchTerm;
   entities;
   currentRadio;
   currentEntity;
-  action;
   title;
   sparqlAdapter;
   wasProcessing;
@@ -97,13 +94,12 @@ export class Sparql {
                 that.isMovingBack = false;
                 // Push previous frame to history
                 if (that.data) {
-                  that.history.push({ data: that.data, actions: that.actions,
+                  that.history.push({ data: that.data, entity: that.currentEntity,
                                     title: that.title, firstRow: that.firstRow });
                 }
                 
                 that.data = resp;
                 that.firstRow = that.data[0];
-                that.resolvedSearchTerm = searchTerm;
                 
                 let context = this.topic.META[this.currentEntity][this.currentAction];
                 that.title = context.title.replace(/REPLACE_ME/, searchTerm);
@@ -125,7 +121,7 @@ export class Sparql {
    
     const snapshot = this.history.slice(-1)[0];
     if (snapshot !== undefined) {
-      this.actions = snapshot.actions;
+      this.currentEntity = snapshot.entity;
       this.data = snapshot.data;
       this.title = snapshot.title;
       this.firstRow = snapshot.firstRow;
