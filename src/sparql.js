@@ -8,12 +8,9 @@ import { SparqlAdapter } from './sparql-adapter' ;
 @inject(TopicProvider, SparqlAdapter)
 export class Sparql {
 
-  searchTerm;
-  resolvedSearchTerm;
   entities;
   currentRadio;
   currentEntity;
-  action;
   title;
   sparqlAdapter;
   wasProcessing;
@@ -103,7 +100,6 @@ export class Sparql {
                 
                 that.data = resp;
                 that.firstRow = that.data[0];
-                that.resolvedSearchTerm = searchTerm;
                 
                 let context = this.topic.META[this.currentEntity][this.currentAction];
                 that.title = context.title.replace(/REPLACE_ME/, searchTerm);
