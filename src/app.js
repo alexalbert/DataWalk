@@ -9,7 +9,7 @@ export class App {
   constructor(topicProvider){
     this.topicProvider = topicProvider;
   }
-
+   
   configureRouter(config, router){
     config.title = 'Data Walk';
 
@@ -25,6 +25,8 @@ export class App {
         nav: true, 
         title: topic });
     }
+    
+    map.push({route: 'about', moduleId: './about', nav: true, title: 'About'})
 
     config.map(map);
 
