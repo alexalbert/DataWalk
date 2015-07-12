@@ -80,11 +80,9 @@ export class Sparql {
     
     this.wasProcessing = true;
     this.isProcessing = true;
-
-    this.currentAction = action;
     
     let that = this;
-    return this.sparqlAdapter.querySparql(searchTerm, entity, this.currentAction).
+    return this.sparqlAdapter.querySparql(searchTerm, entity, action).
       then(resp => {
             if (resp) {
                 if (that.isMovingBack) {
@@ -100,9 +98,9 @@ export class Sparql {
                 that.data = resp;
                 that.firstRow = that.data[0];
                 
-                let context = this.topic.META[this.currentEntity][this.currentAction];
+                let context = that.topic.META[entity][action];
                 that.title = context.title.replace(/REPLACE_ME/, searchTerm);
-                this.currentEntity = context.target;
+                that.currentEntity = context.target;
 
                 that.searchTerm = null;
                 that.isProcessing = false;
