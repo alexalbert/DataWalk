@@ -1,7 +1,7 @@
 import {inject} from 'aurelia-framework';
-import {SparqlMovies} from './sparql-movies' ;
-import {SparqlProgramingLanguages} from './sparql-programing_languages' ;
-import {SparqlNobels} from './sparql-nobels' ;
+import {SparqlMovies} from './topics/sparql-movies' ;
+import {SparqlProgramingLanguages} from './topics/sparql-programing_languages' ;
+import {SparqlNobels} from './topics/sparql-nobels' ;
 
 @inject(SparqlMovies, SparqlProgramingLanguages, SparqlNobels, SparqlNobels)
 export class TopicProvider {
