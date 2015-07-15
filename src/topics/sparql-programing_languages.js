@@ -54,8 +54,8 @@ export class SparqlProgramingLanguages {
 
   META = {
     'Language': {
-      'Influenced by': { target: 'Language', title: 'Languages influenced by REPLACE_ME', query: this.influencedBy },
-      'Influenced': { target: 'Language', title: 'REPLACE_ME is influenced by', query: this.influencedBy }
+      'Influenced': { target: 'Language', title: 'REPLACE_ME influenced', query: this.influenced },
+      'Influenced by': { target: 'Language', title: 'REPLACE_ME is influenced by', query: this.influencedBy }
     }
   };
 }
