@@ -8,9 +8,9 @@ export class SparqlNobels {
   set showWiki(showWiki) {
     this.withWiki = showWiki;
   }
-  
+
   get description() {
-    return this.withWiki ? 'Source: data.nobelprize.org and wiki.dbpedia.org.' : 
+    return this.withWiki ? 'Source: data.nobelprize.org and wiki.dbpedia.org.' :
                            'Source: data.nobelprize.org.';
   }
 
@@ -22,7 +22,6 @@ export class SparqlNobels {
 
     return `SELECT DISTINCT ?Name ?Category ?Year ?Country ?Wiki WHERE {
       ?p rdfs:label ?Name .
-      ?p rdf:type nobel:Laureate .
       ?p nobel:nobelPrize ? ?np .
       ?np nobel:year ?Year .
       ?p dbpedia-owl:birthPlace ?placeOfBirth .
@@ -32,7 +31,7 @@ export class SparqlNobels {
       ?npcategory rdfs:label ?Category .
       ?p owl:sameAs ?wklink .
       FILTER(${filter}) .
-      ${WIKI_CLAUSE} 
+      ${WIKI_CLAUSE}
       }`;
   }
 
@@ -88,4 +87,3 @@ export class SparqlNobels {
     },
   };
 }
-
