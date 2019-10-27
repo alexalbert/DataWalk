@@ -46,7 +46,9 @@ export class SparqlAdapter {
     encode(str) {
         return str.replace(/#/g, "%23").
             replace(/&/g, "%26").
-            replace(/ /g, "+");
+            replace(/ /g, "%20").
+            replace(/</g, "%3C").
+            replace(/[\n\r]/g, '');
     }
 
     // Remove  quotes as they break enclosing quotes in resulting query

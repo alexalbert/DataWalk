@@ -52,7 +52,7 @@ export class SparqlMovies {
     return `SELECT DISTINCT ?Actor ?Wiki WHERE {
     ?f rdf:type dbpedia-owl:Film .
     ?f  rdfs:label ?Film .
-	  ?f  dbp:starring ?a .
+	  ?f  dbo:starring ?a .
     ?a rdfs:label ?Actor .
     ?a foaf:isPrimaryTopicOf ?Wiki .
     ?Film bif:contains  '"${film}"' .
