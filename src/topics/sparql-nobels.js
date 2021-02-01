@@ -15,10 +15,12 @@ export class SparqlNobels {
   }
 
   query(filter, withWiki) {
-    let WIKI_CLAUSE = this.withWiki ? ` SERVICE <http://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org>
+    let WIKI_CLAUSE1 = this.withWiki ? ` SERVICE <http://dbpedia.org/sparql?default-graph-uri=http://dbpedia.org>
       {
         ?wklink foaf:isPrimaryTopicOf ?Wiki .
       }` : "";
+
+    let WIKI_CLAUSE2 = this.withWiki ? ` ?p owl:sameAs ?wklink .` : "";
 
     return `SELECT DISTINCT ?Name ?Category ?Year ?Country ?Wiki WHERE {
       ?p rdfs:label ?Name .
@@ -29,9 +31,9 @@ export class SparqlNobels {
       ?placeOfBirth rdfs:label ?Country .
       ?np nobel:category ?npcategory .
       ?npcategory rdfs:label ?Category .
-      ?p owl:sameAs ?wklink .
+      ${WIKI_CLAUSE2}
       FILTER(${filter}) .
-      ${WIKI_CLAUSE}
+      ${WIKI_CLAUSE1}
       }`;
   }
 
