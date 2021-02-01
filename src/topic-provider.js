@@ -19,7 +19,7 @@ export class TopicProvider {
       "Movies": this.sparqlMovies,
       "Programing Languages": this.sparqlProgramingLanguages,
       "Nobel Prizes": this.sparqlNobels,
-      "Nobel Prizes (slower)": this.sparqlNobelsWiki
+      // "Nobel Prizes (slower)": this.sparqlNobelsWiki
     };
   }
 }
